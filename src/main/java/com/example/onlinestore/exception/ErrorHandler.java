@@ -1,6 +1,7 @@
 package com.example.onlinestore.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,15 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestControllerAdvice
 public class ErrorHandler {
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(final DataIntegrityViolationException e) {
+        ErrorResponse errorResponse = createErrorResponse(
+                HttpStatus.BAD_REQUEST, "Incorrectly made request", e
+        );
+        log.warn(errorResponse.toString());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleNoSuchElementException(final NoSuchElementException e) {
         ErrorResponse errorResponse = createErrorResponse(

@@ -12,7 +12,7 @@ public class ProductRequestDto {
     private Long id;
     @NotBlank(groups = {Create.class, Update.class}) @Size(max = 50, groups = {Create.class, Update.class})
     private String series;
-    @NotBlank(groups = {Create.class, Update.class})
+    @NotBlank(groups = {Create.class, Update.class}) @Size(max = 50, groups = {Create.class, Update.class})
     private String company;
     @Positive(groups = {Create.class, Update.class})
     private double price;
