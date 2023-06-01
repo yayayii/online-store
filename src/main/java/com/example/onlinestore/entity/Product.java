@@ -21,4 +21,12 @@ public class Product {
     private Company company;
     private double price;
     private int amount;
+
+
+    public Product(String series, Company company, double price, int amount) {
+        this.series = series;
+        this.company = company;
+        this.price = price;
+        this.amount = amount;
+    }
 }

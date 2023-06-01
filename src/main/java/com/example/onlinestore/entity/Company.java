@@ -11,7 +11,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table
 public class Company {
     @Id
     @EqualsAndHashCode.Exclude
