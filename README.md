@@ -2,7 +2,7 @@
 Simple online electronic store for test task.
 
 Приложение запускается с помощью команды в командной строке из папки проекта:
-`java -jar target/online-store-0.0.1-SNAPSHOT.jar`
+`mvn spring-boot:run`
 
 Сервер запускается по адресу:
 `localhost:8080`
