@@ -1,6 +1,6 @@
-package com.example.onlinestore.entity;
+package com.example.onlinestore.entity.product;
 
-import com.example.onlinestore.entity.enum_.FormFactor;
+import com.example.onlinestore.entity.product.enum_.FormFactor;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -16,7 +16,7 @@ public class Computer extends Product {
     private FormFactor formFactor;
 
 
-    public Computer(String series, Company company, double price, int amount, FormFactor formFactor) {
+    public Computer(String series, String company, double price, int amount, FormFactor formFactor) {
         super(series, company, price, amount);
         this.formFactor = formFactor;
     }

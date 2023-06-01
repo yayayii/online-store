@@ -1,4 +1,4 @@
-package com.example.onlinestore.entity;
+package com.example.onlinestore.entity.product;
 
 import lombok.*;
 
@@ -15,7 +15,7 @@ public class Hdd extends Product {
     private double storageSize;
 
 
-    public Hdd(String series, Company company, double price, int amount, double storageSize) {
+    public Hdd(String series, String company, double price, int amount, double storageSize) {
         super(series, company, price, amount);
         this.storageSize = storageSize;
     }

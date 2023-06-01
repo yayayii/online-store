@@ -1,4 +1,4 @@
-package com.example.onlinestore.entity;
+package com.example.onlinestore.entity.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +17,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String series;
-    @ManyToOne
-    private Company company;
+    private String company;
     private double price;
     private int amount;
 
 
-    public Product(String series, Company company, double price, int amount) {
+    public Product(String series, String company, double price, int amount) {
         this.series = series;
         this.company = company;
         this.price = price;

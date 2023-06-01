@@ -1,4 +1,4 @@
-package com.example.onlinestore.entity;
+package com.example.onlinestore.entity.product;
 
 import lombok.*;
 
@@ -15,7 +15,7 @@ public class Laptop extends Product {
     private int screenSize;
 
 
-    public Laptop(String series, Company company, double price, int amount, int screenSize) {
+    public Laptop(String series, String company, double price, int amount, int screenSize) {
         super(series, company, price, amount);
         this.screenSize = screenSize;
     }
