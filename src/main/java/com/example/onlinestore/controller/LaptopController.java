@@ -24,7 +24,9 @@ public class LaptopController {
 
 
     @PostMapping
-    public ResponseEntity<LaptopResponseDto> createLaptop(@RequestBody @Validated(Create.class) LaptopRequestDto requestDto) {
+    public ResponseEntity<LaptopResponseDto> createLaptop(
+            @RequestBody @Validated(Create.class) LaptopRequestDto requestDto
+    ) {
         log.info("LaptopController-createLaptop. Recieved: {}", requestDto);
 
         ResponseEntity<LaptopResponseDto> response = new ResponseEntity<>(
