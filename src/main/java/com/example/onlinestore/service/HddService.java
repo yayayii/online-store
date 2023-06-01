@@ -23,13 +23,13 @@ public class HddService {
 
 
     @Transactional
-    public HddResponseDto addHdd(HddRequestDto requestDto) {
-        log.info("HddService-addHdd. Recieved: {}", requestDto);
+    public HddResponseDto createHdd(HddRequestDto requestDto) {
+        log.info("HddService-createHdd. Recieved: {}", requestDto);
 
         Hdd hdd = HddMapper.toEntity(requestDto);
         HddResponseDto responseDto = HddMapper.toResponseDto(repository.save(hdd));
 
-        log.info("HddService-addHdd. Sending: {}", responseDto);
+        log.info("HddService-createHdd. Sending: {}", responseDto);
         return responseDto;
     }
 

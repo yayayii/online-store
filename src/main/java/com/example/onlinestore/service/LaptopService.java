@@ -23,13 +23,13 @@ public class LaptopService {
 
 
     @Transactional
-    public LaptopResponseDto addLaptop(LaptopRequestDto requestDto) {
-        log.info("LaptopService-addLaptop. Recieved: {}", requestDto);
+    public LaptopResponseDto createLaptop(LaptopRequestDto requestDto) {
+        log.info("LaptopService-createLaptop. Recieved: {}", requestDto);
 
         Laptop laptop = LaptopMapper.toEntity(requestDto);
         LaptopResponseDto responseDto = LaptopMapper.toResponseDto(repository.save(laptop));
 
-        log.info("LaptopService-addLaptop. Sending: {}", responseDto);
+        log.info("LaptopService-createLaptop. Sending: {}", responseDto);
         return responseDto;
     }
 

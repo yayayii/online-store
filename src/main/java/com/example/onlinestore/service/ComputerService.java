@@ -23,13 +23,13 @@ public class ComputerService {
 
 
     @Transactional
-    public ComputerResponseDto addComputer(ComputerRequestDto requestDto) {
-        log.info("ComputerService-addComputer. Recieved: {}", requestDto);
+    public ComputerResponseDto createComputer(ComputerRequestDto requestDto) {
+        log.info("ComputerService-createComputer. Recieved: {}", requestDto);
 
         Computer computer = ComputerMapper.toEntity(requestDto);
         ComputerResponseDto responseDto = ComputerMapper.toResponseDto(repository.save(computer));
 
-        log.info("ComputerService-addComputer. Sending: {}", responseDto);
+        log.info("ComputerService-createComputer. Sending: {}", responseDto);
         return responseDto;
     }
 

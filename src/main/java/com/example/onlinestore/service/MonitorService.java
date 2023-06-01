@@ -23,13 +23,13 @@ public class MonitorService {
 
 
     @Transactional
-    public MonitorResponseDto addMonitor(MonitorRequestDto requestDto) {
-        log.info("MonitorService-addMonitor. Recieved: {}", requestDto);
+    public MonitorResponseDto createMonitor(MonitorRequestDto requestDto) {
+        log.info("MonitorService-createMonitor. Recieved: {}", requestDto);
 
         Monitor monitor = MonitorMapper.toEntity(requestDto);
         MonitorResponseDto responseDto = MonitorMapper.toResponseDto(repository.save(monitor));
 
-        log.info("MonitorService-addMonitor. Sending: {}", responseDto);
+        log.info("MonitorService-createMonitor. Sending: {}", responseDto);
         return responseDto;
     }
 
