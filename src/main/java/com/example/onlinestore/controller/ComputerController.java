@@ -3,14 +3,16 @@ package com.example.onlinestore.controller;
 import com.example.onlinestore.dto.request.product.ComputerRequestDto;
 import com.example.onlinestore.dto.response.product.ComputerResponseDto;
 import com.example.onlinestore.service.ComputerService;
+import com.example.onlinestore.util.marker.Create;
+import com.example.onlinestore.util.marker.Update;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,7 +24,9 @@ public class ComputerController {
 
 
     @PostMapping
-    public ResponseEntity<ComputerResponseDto> createComputer(@RequestBody @Valid ComputerRequestDto requestDto) {
+    public ResponseEntity<ComputerResponseDto> createComputer(
+            @RequestBody @Validated(Create.class) ComputerRequestDto requestDto
+    ) {
         log.info("ComputerController-createComputer. Recieved: {}", requestDto);
 
         ResponseEntity<ComputerResponseDto> response = new ResponseEntity<>(
@@ -33,13 +37,13 @@ public class ComputerController {
         return response;
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping
     public ResponseEntity<ComputerResponseDto> updateComputer(
-            @PathVariable Long id, @RequestBody @Valid ComputerRequestDto requestDto
+            @RequestBody @Validated(Update.class) ComputerRequestDto requestDto
     ) {
-        log.info("ComputerController-updateComputer. Recieved: {}; {}", id, requestDto);
+        log.info("ComputerController-updateComputer. Recieved: {}", requestDto);
 
-        ResponseEntity<ComputerResponseDto> response = ResponseEntity.ok(service.updateComputer(id, requestDto));
+        ResponseEntity<ComputerResponseDto> response = ResponseEntity.ok(service.updateComputer(requestDto));
 
         log.info("ComputerController-updateComputer. Sending: {}", response);
         return response;

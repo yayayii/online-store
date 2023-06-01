@@ -1,24 +1,16 @@
 package com.example.onlinestore.dto.request.product;
 
+import com.example.onlinestore.util.marker.Create;
+import com.example.onlinestore.util.marker.Update;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class HddRequestDto {
-    @NotBlank
-    @Size(max = 50)
-    private String series;
-    @NotNull
-    private String company;
-    @NotNull
-    private double price;
-    @NotNull
-    private int amount;
-    @NotNull
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+public class HddRequestDto extends ProductRequestDto {
+    @Positive(groups = {Create.class, Update.class})
     private double storageSize;
 }

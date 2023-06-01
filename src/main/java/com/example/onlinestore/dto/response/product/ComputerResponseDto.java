@@ -1,18 +1,18 @@
 package com.example.onlinestore.dto.response.product;
 
 import com.example.onlinestore.entity.product.enum_.FormFactor;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class ComputerResponseDto {
-    private Long id;
-    private String series;
-    private String company;
-    private double price;
-    private int amount;
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+public class ComputerResponseDto extends ProductResponseDto {
     private FormFactor formFactor;
+
+
+    public ComputerResponseDto(Long id, String series, String company, double price, int amount, FormFactor formFactor) {
+        super(id, series, company, price, amount);
+        this.formFactor = formFactor;
+    }
 }

@@ -1,25 +1,17 @@
 package com.example.onlinestore.dto.request.product;
 
 import com.example.onlinestore.entity.product.enum_.FormFactor;
+import com.example.onlinestore.util.marker.Create;
+import com.example.onlinestore.util.marker.Update;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class ComputerRequestDto {
-    @NotBlank
-    @Size(max = 50)
-    private String series;
-    @NotNull
-    private String company;
-    @NotNull
-    private double price;
-    @NotNull
-    private int amount;
-    @NotNull
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+public class ComputerRequestDto extends ProductRequestDto {
+    @NotNull(groups = {Create.class, Update.class})
     private FormFactor formFactor;
 }

@@ -4,7 +4,7 @@ import com.example.onlinestore.dto.request.product.LaptopRequestDto;
 import com.example.onlinestore.dto.response.product.LaptopResponseDto;
 import com.example.onlinestore.entity.product.Laptop;
 import com.example.onlinestore.mapper.LaptopMapper;
-import com.example.onlinestore.repository.ProductRepository;
+import com.example.onlinestore.repository.LaptopRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class LaptopService {
-    private final ProductRepository<Laptop> repository;
+    private final LaptopRepository repository;
 
 
     @Transactional
@@ -34,11 +34,11 @@ public class LaptopService {
     }
 
     @Transactional
-    public LaptopResponseDto updateLaptop(Long laptopId, LaptopRequestDto requestDto) {
-        log.info("LaptopService-updateLaptop. Recieved: {}; {}", laptopId, requestDto);
+    public LaptopResponseDto updateLaptop(LaptopRequestDto requestDto) {
+        log.info("LaptopService-updateLaptop. Recieved: {}", requestDto);
 
-        Laptop laptop = repository.findById(laptopId)
-                .orElseThrow(() -> new NoSuchElementException("Laptop id = " + laptopId + " doesn't exist"));
+        Laptop laptop = repository.findById(requestDto.getId())
+                .orElseThrow(() -> new NoSuchElementException("Laptop id = " + requestDto.getId() + " doesn't exist"));
         laptop.setSeries(requestDto.getSeries());
         laptop.setCompany(requestDto.getCompany());
         laptop.setPrice(requestDto.getPrice());
@@ -50,11 +50,11 @@ public class LaptopService {
         return responseDto;
     }
 
-    public LaptopResponseDto getLaptopById(Long laptopId) {
-        log.info("LaptopService-getLaptopById. Recieved: {}", laptopId);
+    public LaptopResponseDto getLaptopById(Long id) {
+        log.info("LaptopService-getLaptopById. Recieved: {}", id);
 
-        Laptop laptop = repository.findById(laptopId)
-                .orElseThrow(() -> new NoSuchElementException("Laptop id = " + laptopId + " doesn't exist"));
+        Laptop laptop = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Laptop id = " + id + " doesn't exist"));
         LaptopResponseDto responseDto = LaptopMapper.toResponseDto(laptop);
 
         log.info("LaptopService-getLaptopById. Sending: {}", responseDto);

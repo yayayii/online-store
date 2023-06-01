@@ -3,14 +3,16 @@ package com.example.onlinestore.controller;
 import com.example.onlinestore.dto.request.product.HddRequestDto;
 import com.example.onlinestore.dto.response.product.HddResponseDto;
 import com.example.onlinestore.service.HddService;
+import com.example.onlinestore.util.marker.Create;
+import com.example.onlinestore.util.marker.Update;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class HddController {
 
 
     @PostMapping
-    public ResponseEntity<HddResponseDto> createHdd(@RequestBody @Valid HddRequestDto requestDto) {
+    public ResponseEntity<HddResponseDto> createHdd(@RequestBody @Validated(Create.class) HddRequestDto requestDto) {
         log.info("ComputerController-createHdd. Recieved: {}", requestDto);
 
         ResponseEntity<HddResponseDto> response = new ResponseEntity<>(
@@ -33,13 +35,13 @@ public class HddController {
         return response;
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping
     public ResponseEntity<HddResponseDto> updateHdd(
-            @PathVariable Long id, @RequestBody @Valid HddRequestDto requestDto
+            @RequestBody @Validated(Update.class) HddRequestDto requestDto
     ) {
-        log.info("ComputerController-updateHdd. Recieved: {}; {}", id, requestDto);
+        log.info("ComputerController-updateHdd. Recieved: {}", requestDto);
 
-        ResponseEntity<HddResponseDto> response = ResponseEntity.ok(service.updateHdd(id, requestDto));
+        ResponseEntity<HddResponseDto> response = ResponseEntity.ok(service.updateHdd(requestDto));
 
         log.info("ComputerController-updateHdd. Sending: {}", response);
         return response;

@@ -3,14 +3,16 @@ package com.example.onlinestore.controller;
 import com.example.onlinestore.dto.request.product.MonitorRequestDto;
 import com.example.onlinestore.dto.response.product.MonitorResponseDto;
 import com.example.onlinestore.service.MonitorService;
+import com.example.onlinestore.util.marker.Create;
+import com.example.onlinestore.util.marker.Update;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class MonitorController {
 
 
     @PostMapping
-    public ResponseEntity<MonitorResponseDto> createMonitor(@RequestBody @Valid MonitorRequestDto requestDto) {
+    public ResponseEntity<MonitorResponseDto> createMonitor(@RequestBody @Validated(Create.class) MonitorRequestDto requestDto) {
         log.info("MonitorController-createMonitor. Recieved: {}", requestDto);
 
         ResponseEntity<MonitorResponseDto> response = new ResponseEntity<>(
@@ -33,13 +35,13 @@ public class MonitorController {
         return response;
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping
     public ResponseEntity<MonitorResponseDto> updateMonitor(
-            @PathVariable Long id, @RequestBody @Valid MonitorRequestDto requestDto
+            @RequestBody @Validated(Update.class) MonitorRequestDto requestDto
     ) {
-        log.info("MonitorController-updateMonitor. Recieved: {}; {}", id, requestDto);
+        log.info("MonitorController-updateMonitor. Recieved: {}", requestDto);
 
-        ResponseEntity<MonitorResponseDto> response = ResponseEntity.ok(service.updateMonitor(id, requestDto));
+        ResponseEntity<MonitorResponseDto> response = ResponseEntity.ok(service.updateMonitor(requestDto));
 
         log.info("MonitorController-updateMonitor. Sending: {}", response);
         return response;

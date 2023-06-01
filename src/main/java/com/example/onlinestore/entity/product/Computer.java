@@ -4,8 +4,9 @@ import com.example.onlinestore.entity.product.enum_.FormFactor;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 @Setter
 @Entity
 public class Computer extends Product {
+    @Enumerated(value = EnumType.STRING)
     private FormFactor formFactor;
 
 

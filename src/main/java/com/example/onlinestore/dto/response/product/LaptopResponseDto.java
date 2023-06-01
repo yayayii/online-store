@@ -1,17 +1,17 @@
 package com.example.onlinestore.dto.response.product;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class LaptopResponseDto  {
-    private Long id;
-    private String series;
-    private String company;
-    private double price;
-    private int amount;
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
+public class LaptopResponseDto extends ProductResponseDto {
     private int screenSize;
+
+
+    public LaptopResponseDto(Long id, String series, String company, double price, int amount, int screenSize) {
+        super(id, series, company, price, amount);
+        this.screenSize = screenSize;
+    }
 }

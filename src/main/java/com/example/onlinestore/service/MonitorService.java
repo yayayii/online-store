@@ -4,7 +4,7 @@ import com.example.onlinestore.dto.request.product.MonitorRequestDto;
 import com.example.onlinestore.dto.response.product.MonitorResponseDto;
 import com.example.onlinestore.entity.product.Monitor;
 import com.example.onlinestore.mapper.MonitorMapper;
-import com.example.onlinestore.repository.ProductRepository;
+import com.example.onlinestore.repository.MonitorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class MonitorService {
-    private final ProductRepository<Monitor> repository;
+    private final MonitorRepository repository;
 
 
     @Transactional
@@ -34,12 +34,11 @@ public class MonitorService {
     }
 
     @Transactional
-    public MonitorResponseDto updateMonitor(Long monitorId, MonitorRequestDto requestDto) {
-        log.info("MonitorService-updateMonitor. Recieved: {}; {}",
-                monitorId, requestDto);
+    public MonitorResponseDto updateMonitor(MonitorRequestDto requestDto) {
+        log.info("MonitorService-updateMonitor. Recieved: {}", requestDto);
 
-        Monitor monitor = repository.findById(monitorId)
-                .orElseThrow(() -> new NoSuchElementException("Computer id = " + monitorId + " doesn't exists"));
+        Monitor monitor = repository.findById(requestDto.getId())
+                .orElseThrow(() -> new NoSuchElementException("Monitor id = " + requestDto.getId() + " doesn't exists"));
         monitor.setSeries(requestDto.getSeries());
         monitor.setCompany(requestDto.getCompany());
         monitor.setPrice(requestDto.getPrice());
@@ -51,11 +50,11 @@ public class MonitorService {
         return responseDto;
     }
 
-    public MonitorResponseDto getMonitorById(Long monitorId) {
-        log.info("MonitorService-getMonitorById. Recieved: {}", monitorId);
+    public MonitorResponseDto getMonitorById(Long id) {
+        log.info("MonitorService-getMonitorById. Recieved: {}", id);
 
-        Monitor monitor = repository.findById(monitorId)
-                .orElseThrow(() -> new NoSuchElementException("Monitor id = " + monitorId + " doesn't exists"));
+        Monitor monitor = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Monitor id = " + id + " doesn't exists"));
         MonitorResponseDto responseDto = MonitorMapper.toResponseDto(monitor);
 
         log.info("MonitorService-getMonitorById. Sending: {}", responseDto);

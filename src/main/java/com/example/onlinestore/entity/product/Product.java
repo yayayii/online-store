@@ -1,13 +1,11 @@
 package com.example.onlinestore.entity.product;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @MappedSuperclass
@@ -16,6 +14,7 @@ public class Product {
     @EqualsAndHashCode.Exclude
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String series;
     private String company;
     private double price;

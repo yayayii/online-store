@@ -3,14 +3,16 @@ package com.example.onlinestore.controller;
 import com.example.onlinestore.dto.request.product.LaptopRequestDto;
 import com.example.onlinestore.dto.response.product.LaptopResponseDto;
 import com.example.onlinestore.service.LaptopService;
+import com.example.onlinestore.util.marker.Create;
+import com.example.onlinestore.util.marker.Update;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class LaptopController {
 
 
     @PostMapping
-    public ResponseEntity<LaptopResponseDto> createLaptop(@RequestBody @Valid LaptopRequestDto requestDto) {
+    public ResponseEntity<LaptopResponseDto> createLaptop(@RequestBody @Validated(Create.class) LaptopRequestDto requestDto) {
         log.info("LaptopController-createLaptop. Recieved: {}", requestDto);
 
         ResponseEntity<LaptopResponseDto> response = new ResponseEntity<>(
@@ -33,13 +35,13 @@ public class LaptopController {
         return response;
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping
     public ResponseEntity<LaptopResponseDto> updateLaptop(
-            @PathVariable Long id, @RequestBody @Valid LaptopRequestDto requestDto
+            @RequestBody @Validated(Update.class) LaptopRequestDto requestDto
     ) {
-        log.info("LaptopController-updateLaptop. Recieved: {}; {}", id, requestDto);
+        log.info("LaptopController-updateLaptop. Recieved: {}", requestDto);
 
-        ResponseEntity<LaptopResponseDto> response = ResponseEntity.ok(service.updateLaptop(id, requestDto));
+        ResponseEntity<LaptopResponseDto> response = ResponseEntity.ok(service.updateLaptop(requestDto));
 
         log.info("LaptopController-updateLaptop. Sending: {}", response);
         return response;

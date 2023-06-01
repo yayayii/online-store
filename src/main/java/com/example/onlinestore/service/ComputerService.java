@@ -4,7 +4,7 @@ import com.example.onlinestore.dto.request.product.ComputerRequestDto;
 import com.example.onlinestore.dto.response.product.ComputerResponseDto;
 import com.example.onlinestore.entity.product.Computer;
 import com.example.onlinestore.mapper.ComputerMapper;
-import com.example.onlinestore.repository.ProductRepository;
+import com.example.onlinestore.repository.ComputerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class ComputerService {
-    private final ProductRepository<Computer> repository;
+    private final ComputerRepository repository;
 
 
     @Transactional
@@ -34,11 +34,11 @@ public class ComputerService {
     }
 
     @Transactional
-    public ComputerResponseDto updateComputer(Long computerId, ComputerRequestDto requestDto) {
-        log.info("ComputerService-updateComputer. Recieved: {}; {}", computerId, requestDto);
+    public ComputerResponseDto updateComputer(ComputerRequestDto requestDto) {
+        log.info("ComputerService-updateComputer. Recieved: {}", requestDto);
 
-        Computer computer = repository.findById(computerId)
-                .orElseThrow(() -> new NoSuchElementException("Computer id = " + computerId + " doesn't exist"));
+        Computer computer = repository.findById(requestDto.getId())
+                .orElseThrow(() -> new NoSuchElementException("Computer id = " + requestDto.getId() + " doesn't exist"));
         computer.setSeries(requestDto.getSeries());
         computer.setCompany(requestDto.getCompany());
         computer.setPrice(requestDto.getPrice());
@@ -50,11 +50,11 @@ public class ComputerService {
         return responseDto;
     }
 
-    public ComputerResponseDto getComputerById(Long computerId) {
-        log.info("ComputerService-getComputerById. Recieved: {}", computerId);
+    public ComputerResponseDto getComputerById(Long id) {
+        log.info("ComputerService-getComputerById. Recieved: {}", id);
 
-        Computer computer = repository.findById(computerId)
-                .orElseThrow(() -> new NoSuchElementException("Computer id = " + computerId + " doesn't exist"));
+        Computer computer = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Computer id = " + id + " doesn't exist"));
         ComputerResponseDto responseDto = ComputerMapper.toResponseDto(computer);
 
         log.info("ComputerService-getComputerById. Sending: {}", responseDto);

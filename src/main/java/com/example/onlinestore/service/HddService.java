@@ -4,7 +4,7 @@ import com.example.onlinestore.dto.request.product.HddRequestDto;
 import com.example.onlinestore.dto.response.product.HddResponseDto;
 import com.example.onlinestore.entity.product.Hdd;
 import com.example.onlinestore.mapper.HddMapper;
-import com.example.onlinestore.repository.ProductRepository;
+import com.example.onlinestore.repository.HddRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class HddService {
-    private final ProductRepository<Hdd> repository;
+    private final HddRepository repository;
 
 
     @Transactional
@@ -34,11 +34,11 @@ public class HddService {
     }
 
     @Transactional
-    public HddResponseDto updateHdd(Long hddId, HddRequestDto requestDto) {
-        log.info("HddService-updateHdd. Recieved: {}; {}", hddId, requestDto);
+    public HddResponseDto updateHdd(HddRequestDto requestDto) {
+        log.info("HddService-updateHdd. Recieved: {}", requestDto);
 
-        Hdd hdd = repository.findById(hddId)
-                .orElseThrow(() -> new NoSuchElementException("HDD id = " + hddId + " doesn't exist"));
+        Hdd hdd = repository.findById(requestDto.getId())
+                .orElseThrow(() -> new NoSuchElementException("HDD id = " + requestDto.getId() + " doesn't exist"));
         hdd.setSeries(requestDto.getSeries());
         hdd.setCompany(requestDto.getCompany());
         hdd.setPrice(requestDto.getPrice());
@@ -50,11 +50,11 @@ public class HddService {
         return responseDto;
     }
 
-    public HddResponseDto getHddById(Long hddId) {
-        log.info("HddService-getHddById. Recieved: {}", hddId);
+    public HddResponseDto getHddById(Long id) {
+        log.info("HddService-getHddById. Recieved: {}", id);
 
-        Hdd hdd = repository.findById(hddId)
-                .orElseThrow(() -> new NoSuchElementException("HDD id = " + hddId + " doesn't exist"));
+        Hdd hdd = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("HDD id = " + id + " doesn't exist"));
         HddResponseDto responseDto = HddMapper.toResponseDto(hdd);
 
         log.info("HddService-getHddById. Sending: {}", responseDto);
