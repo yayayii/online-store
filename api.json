@@ -1,0 +1,1368 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "online store API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "description": "адрес сервера",
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/computers": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComputerCreateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComputerResponseDto"
+                }
+              }
+            },
+            "description": "Компьютер добавлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Добавление компьютера",
+        "tags": [
+          "Компьютеры"
+        ]
+      },
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComputerUpdateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComputerResponseDto"
+                }
+              }
+            },
+            "description": "Компьютер обновлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего компьютера"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Обновление компьютера",
+        "tags": [
+          "Компьютеры"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ComputerResponseDto"
+                  }
+                }
+              }
+            },
+            "description": "Компьютеры получены"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение всех добавленных компьютеров",
+        "tags": [
+          "Компьютеры"
+        ]
+      }
+    },
+    "/computers/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "id компьютера",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComputerResponseDto"
+                }
+              }
+            },
+            "description": "Компьютер получен"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего компьютера"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение компьютера по id",
+        "tags": [
+          "Компьютеры"
+        ]
+      }
+    },
+    "/hdds": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HddCreateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HddResponseDto"
+                }
+              }
+            },
+            "description": "Жесткий диск добавлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Добавление жесткого диска",
+        "tags": [
+          "Жесткие диски"
+        ]
+      },
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HddUpdateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HddResponseDto"
+                }
+              }
+            },
+            "description": "Жесткий диск обновлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего жесткого диска"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Обновление жесткого диска",
+        "tags": [
+          "Жесткие диски"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HddResponseDto"
+                  }
+                }
+              }
+            },
+            "description": "Жесткие диски получены"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение всех добавленных жестких дисков",
+        "tags": [
+          "Жесткие диски"
+        ]
+      }
+    },
+    "/hdds/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "id жесткого диска",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HddResponseDto"
+                }
+              }
+            },
+            "description": "Жесткий диск получен"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего жесткого диска"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение жесткого диска по id",
+        "tags": [
+          "Жесткие диски"
+        ]
+      }
+    },
+    "/laptops": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LaptopCreateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaptopResponseDto"
+                }
+              }
+            },
+            "description": "Ноутбук добавлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Добавление ноутбука",
+        "tags": [
+          "Ноутбуки"
+        ]
+      },
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LaptopUpdateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaptopResponseDto"
+                }
+              }
+            },
+            "description": "Ноутбук обновлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего ноутбука"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Обновление ноутбука",
+        "tags": [
+          "Ноутбуки"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LaptopResponseDto"
+                  }
+                }
+              }
+            },
+            "description": "Ноутбуки получены"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение всех добавленных ноутбуков",
+        "tags": [
+          "Ноутбуки"
+        ]
+      }
+    },
+    "/laptops/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "id ноутбука",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaptopResponseDto"
+                }
+              }
+            },
+            "description": "Ноутбук получен"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего ноутбука"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение ноутбука по id",
+        "tags": [
+          "Ноутбуки"
+        ]
+      }
+    },
+    "/monitors": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonitorCreateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitorResponseDto"
+                }
+              }
+            },
+            "description": "Монитор добавлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Добавление монитора",
+        "tags": [
+          "Мониторы"
+        ]
+      },
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonitorUpdateRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitorResponseDto"
+                }
+              }
+            },
+            "description": "Монитор обновлен"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неправильно составленное тело запроса"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего монитора"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Обновление монитора",
+        "tags": [
+          "Мониторы"
+        ]
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MonitorResponseDto"
+                  }
+                }
+              }
+            },
+            "description": "Мониторы получены"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение всех добавленных мониторов",
+        "tags": [
+          "Мониторы"
+        ]
+      }
+    },
+    "/monitors/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "description": "id монитора",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitorResponseDto"
+                }
+              }
+            },
+            "description": "Монитор получен"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Указан id несуществующего монитора"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Неизвестная ошибка"
+          }
+        },
+        "summary": "Получение монитора по id",
+        "tags": [
+          "Мониторы"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ComputerCreateRequestDto": {
+        "required": [
+          "series",
+          "company",
+          "price",
+          "amount",
+          "formFactor"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "formFactor": {
+            "type": "string",
+            "enum": [
+              "DESKTOP",
+              "NETTOP",
+              "MONOBLOCK"
+            ],
+            "example": "DESKTOP1"
+          }
+        },
+        "description": "дто для добавления компьютера"
+      },
+      "ComputerUpdateRequestDto": {
+        "required": [
+          "id",
+          "series",
+          "company",
+          "price",
+          "amount",
+          "formFactor"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор уже созданного товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "formFactor": {
+            "type": "string",
+            "enum": [
+              "DESKTOP",
+              "NETTOP",
+              "MONOBLOCK"
+            ],
+            "example": "DESKTOP"
+          }
+        },
+        "description": "дто для обновления данных уже добавленного компьютера"
+      },
+      "ComputerResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "description": "номер серии",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "description": "производитель",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе",
+            "format": "int",
+            "example": 1
+          },
+          "formFactor": {
+            "type": "string",
+            "enum": [
+              "DESKTOP",
+              "NETTOP",
+              "MONOBLOCK"
+            ],
+            "example": "DESKTOP"
+          }
+        },
+        "description": "дто, возвращаемое при работе с компьютерами"
+      },
+      "HddCreateRequestDto": {
+        "required": [
+          "series",
+          "company",
+          "price",
+          "amount",
+          "storageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "storageSize": {
+            "type": "number",
+            "description": "размер жесткого диска в ТБ (положительное число)",
+            "format": "double",
+            "example": 1.0
+          }
+        },
+        "description": "дто для добавления жесткого диска"
+      },
+      "HddUpdateRequestDto": {
+        "required": [
+          "id",
+          "series",
+          "company",
+          "price",
+          "amount",
+          "storageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор уже созданного товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "storageSize": {
+            "type": "number",
+            "description": "размер жесткого диска в ТБ (положительное число)",
+            "format": "double",
+            "example": 1.0
+          }
+        },
+        "description": "дто для обновления данных уже добавленного жесткого диска"
+      },
+      "HddResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "description": "номер серии",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "description": "производитель",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе",
+            "format": "int",
+            "example": 1
+          },
+          "storageSize": {
+            "type": "number",
+            "description": "размер жесткого диска в ТБ",
+            "format": "double",
+            "example": 1.0
+          }
+        },
+        "description": "дто, возвращаемое при работе с жесткими дисками"
+      },
+      "LaptopCreateRequestDto": {
+        "required": [
+          "series",
+          "company",
+          "price",
+          "amount",
+          "screenSize"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "screenSize": {
+            "type": "integer",
+            "description": "размер экрана ноутбука",
+            "enum": [
+              13,
+              14,
+              15,
+              17
+            ],
+            "format": "int",
+            "example": 13
+          }
+        },
+        "description": "дто для добавления ноутбука"
+      },
+      "LaptopUpdateRequestDto": {
+        "required": [
+          "id",
+          "series",
+          "company",
+          "price",
+          "amount",
+          "formFactor"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор уже созданного товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "screenSize": {
+            "type": "integer",
+            "description": "размер экрана ноутбука",
+            "enum": [
+              13,
+              14,
+              15,
+              17
+            ],
+            "format": "int",
+            "example": 13
+          }
+        },
+        "description": "дто для обновления данных уже добавленного ноутбука"
+      },
+      "LaptopResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "description": "номер серии",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "description": "производитель",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе",
+            "format": "int",
+            "example": 1
+          },
+          "screenSize": {
+            "type": "integer",
+            "description": "размер экрана ноутбука",
+            "enum": [
+              13,
+              14,
+              15,
+              17
+            ],
+            "format": "int",
+            "example": 13
+          }
+        },
+        "description": "дто, возвращаемое при работе с ноутбуками"
+      },
+      "MonitorCreateRequestDto": {
+        "required": [
+          "series",
+          "company",
+          "price",
+          "amount",
+          "screenSize"
+        ],
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "screenSize": {
+            "type": "integer",
+            "description": "диагональ монитора (положительное число)",
+            "format": "int",
+            "example": 1
+          }
+        },
+        "description": "дто для добавления монитора"
+      },
+      "MonitorUpdateRequestDto": {
+        "required": [
+          "id",
+          "series",
+          "company",
+          "price",
+          "amount",
+          "screenSize"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор уже созданного товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "номер серии (уникальное ненулевое значение)",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 50,
+            "description": "производитель (ненулевое значение)",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях (положительное число)",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе (число большее или равное нулю)",
+            "format": "int",
+            "example": 1
+          },
+          "screenSize": {
+            "type": "integer",
+            "description": "диагональ монитора (положительное число)",
+            "format": "int",
+            "example": 1
+          }
+        },
+        "description": "дто для обновления данных уже добавленного монитора"
+      },
+      "MonitorResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "идентификатор товара",
+            "form": "long",
+            "example": 1
+          },
+          "series": {
+            "type": "string",
+            "description": "номер серии",
+            "example": "series"
+          },
+          "company": {
+            "type": "string",
+            "description": "производитель",
+            "example": "company"
+          },
+          "price": {
+            "type": "number",
+            "description": "цена в рублях",
+            "format": "double",
+            "example": 1.0
+          },
+          "amount": {
+            "type": "integer",
+            "description": "количество единиц продукции на складе",
+            "format": "int",
+            "example": 1
+          },
+          "screenSize": {
+            "type": "integer",
+            "description": "диагональ монитора",
+            "format": "int",
+            "example": 1
+          }
+        },
+        "description": "дто, возвращаемое при работе с мониторами"
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Название статус-кода ошибки",
+            "example": "Statuc Code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Основная причина ошибки",
+            "example": "message"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Подробное описание ошибки",
+            "example": "reason"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Дата и время когда произошла ошибка",
+            "example": "2020-20-20T20:20:20.20"
+          }
+        },
+        "description": "Сведения об ошибке"
+      }
+    }
+  }
+}
