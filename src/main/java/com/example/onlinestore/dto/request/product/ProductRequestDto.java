@@ -2,10 +2,14 @@ package com.example.onlinestore.dto.request.product;
 
 import com.example.onlinestore.util.marker.Create;
 import com.example.onlinestore.util.marker.Update;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class ProductRequestDto {
     @NotNull(groups = Update.class)
